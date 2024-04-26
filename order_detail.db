@@ -1,0 +1,21 @@
+SELECT
+    t1.sku_id, t1.year, sum(sku_num) order_num, cast(sum(pv)) as decimal(16,2)) order_amount
+FROM 
+ (
+    SELECT
+    sku_id, min(year(create_date)) year 
+    FROM
+    order_detail 
+    GROUP BY sku_id
+ )   t1 
+
+left join
+(
+    SELECT
+    sku_id, year(create_date) year, price*sku_num pv, sku_num
+    FROM 
+    order detail 
+) t2 
+
+on t1.sku_id = t2.sku_id and t1.year = t2.year
+group by t1.sku_id, t1_year

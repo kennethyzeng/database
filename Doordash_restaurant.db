@@ -1,0 +1,16 @@
+/*
+Door dash data scientist interview 
+use a Winodw function NTILE(n) which divide data into n buckets
+*/
+
+SELECT restaurant_id, total_order
+FROM 
+    (SELECT restaurant_id, 
+        sum(order_total) as total_order, 
+        ntile(50) OVER (
+            Order by sum(order_total))
+    FROM doordash_delivery
+    WHERE customer_placed_order_datetime BETWEEN '2020-05-01' and '2020-05-31'
+    GROUP BY restaurant_id) sq
+WHERE ntile=1
+ORDER BY 2 DESC
