@@ -1,6 +1,9 @@
 /*
 Door dash data scientist interview 
 use a Winodw function NTILE(n) which divide data into n buckets
+
+ORDER BY 2 DESC
+  -it means that you want to sort the result set by the second column in descending order.  =>total_toal in desceding order
 */
 
 SELECT restaurant_id, total_order
@@ -14,3 +17,4 @@ FROM
     GROUP BY restaurant_id) sq
 WHERE ntile=1
 ORDER BY 2 DESC
+
